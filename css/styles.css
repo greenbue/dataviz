@@ -1,0 +1,34 @@
+.dc-chart g.row text {
+  fill:black;
+}
+
+.dc-chart g.row text.row.dim {
+  fill:grey;
+}
+
+.dc-chart .selected path {
+    stroke-width: 0;
+    stroke: #ccc;
+    fill-opacity: 1;
+}
+
+.legend.dc-chart g.row rect {
+    fill-opacity: 0.8;
+    cursor: default;
+}
+
+.legend.dc-chart g.row text {
+    cursor: default;
+}
+
+.legend.dc-chart g.row rect:hover {
+    fill-opacity: 0.8;
+}
+
+.dc-chart .pie-slice {
+  fill:black;
+}
+
+.grey {
+  opacity: 0.5;
+}
