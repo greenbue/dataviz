@@ -101,8 +101,7 @@ importByYear = configureableReduce("Country of Origin", "Value", {
 
   commodity_country_chart = dc.lineChart('#commodity-country')
     .dimension(year)
-    .group(commodity_country_group, "Australia")
-    .valueAccessor(function(d){return d.value["Australia"]})
+    .group(commodity_country_group, "Australia", function(d){return d.value["Australia"]})
     .stack(commodity_country_group,"China, People's Republic of" ,function(d){return d.value["China, People's Republic of" ]})
     .stack(commodity_country_group,"United States of America" ,function(d){return d.value["United States of America" ]})
     .stack(commodity_country_group,"Japan" ,function(d){return d.value["Japan" ]})
@@ -116,6 +115,7 @@ importByYear = configureableReduce("Country of Origin", "Value", {
     .elasticY(true)
     .renderArea(true)
     .label(function(d) { return d.value; })
+    .title(function(d) { return d.key+": "+d3.format(',')(d.value[this.layer])+" ("+this.layer+")";})
     .legend(dc.legend().x(800).y(10).itemHeight(13).gap(5))
     .brushOn(false);
     
@@ -124,10 +124,10 @@ importByYear = configureableReduce("Country of Origin", "Value", {
     .dimension(year)
     .group(commodity_country_group, "Australia")
     .valueAccessor(function(d){return d.value["Australia"]})
-    .stack(commodity_country_group,"China, People's Republic of" ,function(d){return d.value["China, People's Republic of" ]})
-    .stack(commodity_country_group,"United States of America" ,function(d){return d.value["United States of America" ]})
-    .stack(commodity_country_group,"Japan" ,function(d){return d.value["Japan" ]})
-    .stack(commodity_country_group,"Germany" ,function(d){return d.value["Germany" ]})
+    .stack(commodity_country_group,"China, People's Republic of" ,function(d){return d.value["China, People's Republic of"]})
+    .stack(commodity_country_group,"United States of America" ,function(d){return d.value["United States of America"]})
+    .stack(commodity_country_group,"Japan" ,function(d){return d.value["Japan"]})
+    .stack(commodity_country_group,"Germany" ,function(d){return d.value["Germany"]})
     .height(small_chart_height+50)
     .width(800)
     .transitionDuration(200)
@@ -138,6 +138,16 @@ importByYear = configureableReduce("Country of Origin", "Value", {
     .renderArea(true)
     .label(function(d) { return d.value; })
     .brushOn(true);
+//    .renderDataPoints({fillOpacity: 1, strokeOpacity: 1, radius: 5, stroke: 'blue', strokeWidth:8})
+//    .on('pretransition', function(chart) {
+//      chart.selectAll('.dot')
+//        .on("mouseover"), function(d){
+//          d3.select(this)
+//          .attr("r", 5) 
+//          .attr("style", "");
+//        }
+//        
+//    });
 
   commodity_country_chart.yAxis().ticks(5).tickFormat(d3.format("s"))
   commodity_country_chart.xAxis().ticks(15).tickFormat(d3.format("B"))
