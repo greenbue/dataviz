@@ -116,10 +116,34 @@ importByYear = configureableReduce("Country of Origin", "Value", {
     .elasticY(true)
     .renderArea(true)
     .label(function(d) { return d.value; })
+    .legend(dc.legend().x(800).y(10).itemHeight(13).gap(5))
+    .brushOn(false);
+    
+    
+    commodity_country_chart2 = dc.lineChart('#commodity-country2')
+    .dimension(year)
+    .group(commodity_country_group, "Australia")
+    .valueAccessor(function(d){return d.value["Australia"]})
+    .stack(commodity_country_group,"China, People's Republic of" ,function(d){return d.value["China, People's Republic of" ]})
+    .stack(commodity_country_group,"United States of America" ,function(d){return d.value["United States of America" ]})
+    .stack(commodity_country_group,"Japan" ,function(d){return d.value["Japan" ]})
+    .stack(commodity_country_group,"Germany" ,function(d){return d.value["Germany" ]})
+    .height(small_chart_height+50)
+    .width(800)
+    .transitionDuration(200)
+    .x(d3.scale.linear().domain([2000,2015]))
+    .colors(default_colors)
+    .elasticX(false)
+    .elasticY(true)
+    .renderArea(true)
+    .label(function(d) { return d.value; })
     .brushOn(true);
 
   commodity_country_chart.yAxis().ticks(5).tickFormat(d3.format("s"))
   commodity_country_chart.xAxis().ticks(15).tickFormat(d3.format("B"))
+  
+  commodity_country_chart2.yAxis().ticks(5).tickFormat(d3.format("s"))
+  commodity_country_chart2.xAxis().ticks(15).tickFormat(d3.format("B"))
 
 
   dc.renderAll();
